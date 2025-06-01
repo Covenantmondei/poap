@@ -1,2 +1,8 @@
 # Environment variables
 .env
+
+# Database
+db.sqlite3
+
+# ABI
+ABI.json
