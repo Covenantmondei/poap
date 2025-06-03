@@ -25,3 +25,14 @@ def create_event_on_chain(title, metadata, location, start_time, creator):
     signed_txn = w3.eth.account.sign_transaction(txn, private_key) 
     tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction) 
     return w3.to_hex(tx_hash) 
+
+def mint_user_badge(user_address, event_id, badge_hash): 
+    txn = contract.functions.mintBadge(user_address, event_id, badge_hash).build_transaction({ 
+        'from': account_address, 
+        'nonce': w3.eth.get_transaction_count(account_address), 
+        'gas': 2000000, 
+        'gasPrice': w3.to_wei('50', 'gwei') 
+    }) 
+    signed_txn = w3.eth.account.sign_transaction(txn, private_key) 
+    tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction) 
+    return w3.to_hex(tx_hash)
